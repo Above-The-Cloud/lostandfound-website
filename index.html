@@ -1,1 +1,76 @@
-hello lost and found website!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    $.get("https://lostandfound.yiwangchunyu.wang/index/show.php", function(data, status){alert("状态：" + status);})
+
+  </script>
+</head>
+<body>
+  <div class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a href="index.html" class="navbar-brand"></a>
+      </div>
+      <label id="toggle-label" class="visible-xs-inline-block" for="toggle-checkbox">MENU</label>
+      <input class="hidden" id="toggle-checkbox" type="checkbox">
+      <div class="hidden-xs">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">FOUND</a></li>
+          <li><a href="#">LOST</a></li>
+          <li><a href="#">个人</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="login.html">登录</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2">
+        <div class="hidden-xs list-group side-bar">
+          <a href="#" class="list-group-item active">所有</a>
+          <a href="#" class="list-group-item">校园卡</a>
+          <a href="#" class="list-group-item">雨伞</a>
+          <a href="#" class="list-group-item">钱包</a>
+          <a href="#" class="list-group-item">其他</a>
+        </div>
+      </div>
+      <div class="col-sm-7">
+        <div class="news-list">
+          <div class="news-list-item clearfix">
+            <div class="col-xs-5">
+              <img class="item-img" src="img/eason.jpg">
+            </div>
+            <div class="col-xs-7">
+              <a href="#" class="title">把雨伞忘在校车上了，想知道被遗忘在校车上的东西会被送到哪里。花边处有花瓣和兔子的图案。谢谢!</a>
+              <div class="info">
+                <span><span class="avatar"><img src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL2aVGkXS3HR9DuOgaaPibZgB5qiag2AuM2fbpo8rYMd87cYpibBeQXCKzf5TallRKSqWic1rg7nKIib3Q/132" ></span>王花花</span> ⋅
+                <span>2019-3-2 12:47</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="search-bar">
+          <input type="search" class="form-control" placeholder="搜索物品信息">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    © 2018 华东师范大学 线上失物招领平台
+    <br>
+    Contact us via <a href="mailto:ecnulostfound@163.com">ecnulostfound@163.com</a>
+  </div>
+</body>
+</html>
