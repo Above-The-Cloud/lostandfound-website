@@ -9,7 +9,13 @@
   <link rel="stylesheet" href="css/main.css">
   <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript">
-    $.get("https://lostandfound.yiwangchunyu.wang/index/show.php", function(data, status){alert("状态：" + status);})
+    $.get("http://lostfound.yiwangchunyu.wang:8000/proxy?url=https://lostandfound.yiwangchunyu.wang/index/show.php", function(data, status)
+    {
+      alert("状态：" + status);
+      var obj = JSON.parse(data);
+      console.log(obj);
+
+    })
 
   </script>
 </head>
@@ -51,9 +57,13 @@
               <img class="item-img" src="img/eason.jpg">
             </div>
             <div class="col-xs-7">
-              <a href="#" class="title">把雨伞忘在校车上了，想知道被遗忘在校车上的东西会被送到哪里。花边处有花瓣和兔子的图案。谢谢!</a>
               <div class="info">
-                <span><span class="avatar"><img src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL2aVGkXS3HR9DuOgaaPibZgB5qiag2AuM2fbpo8rYMd87cYpibBeQXCKzf5TallRKSqWic1rg7nKIib3Q/132" ></span>王花花</span> ⋅
+                <span><span class="avatar"><img src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL2aVGkXS3HR9DuOgaaPibZgB5qiag2AuM2fbpo8rYMd87cYpibBeQXCKzf5TallRKSqWic1rg7nKIib3Q/132" ></span>王花花</span>
+              </div>
+              <br>
+              <a href="#" class="title">把雨伞忘在校车上了，想知道被遗忘在校车上的东西会被送到哪里。花边处有花瓣和兔子的图案。谢谢!</a>
+              <br>
+              <div class="info">
                 <span>2019-3-2 12:47</span>
               </div>
             </div>
