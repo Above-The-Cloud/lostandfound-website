@@ -32,7 +32,7 @@ img,
     padding-top: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid #eee;
-    height: 300px;
+    /* height: 300px; */
 }
 
 .news-list-item:first-child {

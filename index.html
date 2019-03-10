@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>LostAndFound</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css">
   <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
@@ -18,19 +18,23 @@
 		  	p=data[i];
 		  	var item=document.createElement("div");
 		  	item.setAttribute("class","news-list-item clearfix");
-		  	var img=document.createElement("img");
-		  	img.setAttribute("class","item-img")
-		  	if(p.image_url.length==0){
-		  		img.setAttribute("src","http://lostfound.yiwangchunyu.wang/img/logo.png");
-		  	}else{
+		  	
+		  	if(p.image_url.length>0){
+		  		var img=document.createElement("img");
+		  		img.setAttribute("class","item-img")
+		  		var img_container=document.createElement("div");
+			  	img_container.setAttribute("class","col-xs-5");
+			  	img_container.append(img);
+			  	item.append(img_container);
 		  		img.setAttribute("src",p.image_url[0]);
 		  	}
-		  	var img_container=document.createElement("div");
-		  	img_container.setAttribute("class","col-xs-5");
-		  	img_container.append(img);
-		  	item.append(img_container);
 		  	var info_container=document.createElement("div");
-		  	info_container.setAttribute("class","col-xs-7");
+		  	if(p.image_url.length==0){
+		  		info_container.setAttribute("class","col-xs-12");
+		  	}else{
+		  		info_container.setAttribute("class","col-xs-7");
+		  	}
+		  	
 		  	var info=document.createElement("div");
 		  	info.setAttribute("class","info");
 		  	var span=document.createElement("span");
