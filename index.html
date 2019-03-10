@@ -9,13 +9,58 @@
   <link rel="stylesheet" href="css/main.css">
   <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript">
-    $.get("http://lostfound.yiwangchunyu.wang:8000/proxy?url=https://lostandfound.yiwangchunyu.wang/index/show.php", function(data, status)
-    {
-      alert("状态：" + status);
-      var obj = JSON.parse(data);
-      console.log(obj);
-
-    })
+  	$(document).ready(function(){
+	    $.get("http://lostfound.yiwangchunyu.wang:8000/proxy?url=https://lostandfound.yiwangchunyu.wang/index/show.php", function(p, status)
+	    {
+	      var rtn = JSON.parse(p);
+		  var data=rtn.data;
+		  for(i in data){
+		  	p=data[i];
+		  	var item=document.createElement("div");
+		  	item.setAttribute("class","news-list-item clearfix");
+		  	var img=document.createElement("img");
+		  	img.setAttribute("class","item-img")
+		  	if(p.image_url.length==0){
+		  		img.setAttribute("src","http://lostfound.yiwangchunyu.wang/img/logo.png");
+		  	}else{
+		  		img.setAttribute("src",p.image_url[0]);
+		  	}
+		  	var img_container=document.createElement("div");
+		  	img_container.setAttribute("class","col-xs-5");
+		  	img_container.append(img);
+		  	item.append(img_container);
+		  	var info_container=document.createElement("div");
+		  	info_container.setAttribute("class","col-xs-7");
+		  	var info=document.createElement("div");
+		  	info.setAttribute("class","info");
+		  	var span=document.createElement("span");
+		  	var inner_span=document.createElement("span");
+		  	inner_span.setAttribute("class","avatar");
+		  	var avatar=document.createElement("img");
+		  	avatar.setAttribute("src",p.avatarUrl);
+		  	inner_span.append(avatar);
+		  	span.append(inner_span);
+		  	span.append(p.nickName);
+		  	info.append(span);
+		  	info_container.append(info);
+		  	info_container.append(document.createElement("br"));
+		  	var msg=document.createElement("a");
+		  	msg.setAttribute("href","#");
+		  	msg.setAttribute("class","title");
+		  	msg.append(p.msg);
+		  	info_container.append(msg);
+		  	info_container.append(document.createElement("br"));
+		  	var time=document.createElement("div");
+		  	time.setAttribute("class","time");
+		  	var time_span=document.createElement("span");
+		  	time_span.append(p.submission_time);
+		  	time.append(time_span);
+		  	info_container.append(time);
+		  	item.append(info_container);
+		  	$("div.news-list").append(item);
+		  }
+	    });
+	})
 
   </script>
 </head>
@@ -52,7 +97,7 @@
       </div>
       <div class="col-sm-7">
         <div class="news-list">
-          <div class="news-list-item clearfix">
+          <!-- <div class="news-list-item clearfix">
             <div class="col-xs-5">
               <img class="item-img" src="img/eason.jpg">
             </div>
@@ -67,7 +112,7 @@
                 <span>2019-3-2 12:47</span>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="col-sm-3">
