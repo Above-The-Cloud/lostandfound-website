@@ -23,7 +23,12 @@ img,
     border: 0;
     margin-bottom: 5px;
 }
-
+.btn.btn-link
+{
+  padding-top:14px;
+  padding-bottom:10px;
+  line-height:20px;
+}
 .side-bar .list-group-item.active {
     background-color: #9DBDBC;
 }

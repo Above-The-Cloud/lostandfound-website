@@ -8,62 +8,96 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css">
   <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+</script>
   <script type="text/javascript">
   	$(document).ready(function(){
+      window.Type='found';
+      window.Category='所有'
+      function publishMsg(rtn, type, category)
+      {
+        var data=rtn.data;
+  		  for(i in data){
+  		  	p=data[i];
+          if(p.type != type)
+            {
+              console.log(p.type + '!' + type);
+              continue;
+            }
+  		  	var item=document.createElement("div");
+  		  	item.setAttribute("class","news-list-item clearfix");
+
+  		  	if(p.image_url.length>0){
+  		  		var img=document.createElement("img");
+  		  		img.setAttribute("class","item-img")
+  		  		var img_container=document.createElement("div");
+  			  	img_container.setAttribute("class","col-xs-5");
+  			  	img_container.append(img);
+  			  	item.append(img_container);
+  		  		img.setAttribute("src",p.image_url[0]);
+  		  	}
+  		  	var info_container=document.createElement("div");
+  		  	if(p.image_url.length==0){
+  		  		info_container.setAttribute("class","col-xs-12");
+  		  	}else{
+  		  		info_container.setAttribute("class","col-xs-7");
+  		  	}
+
+  		  	var info=document.createElement("div");
+  		  	info.setAttribute("class","info");
+  		  	var span=document.createElement("span");
+  		  	var inner_span=document.createElement("span");
+  		  	inner_span.setAttribute("class","avatar");
+  		  	var avatar=document.createElement("img");
+  		  	avatar.setAttribute("src",p.avatarUrl);
+  		  	inner_span.append(avatar);
+  		  	span.append(inner_span);
+  		  	span.append(p.nickName);
+  		  	info.append(span);
+  		  	info_container.append(info);
+  		  	info_container.append(document.createElement("br"));
+  		  	var msg=document.createElement("a");
+  		  	msg.setAttribute("href","#");
+  		  	msg.setAttribute("class","title");
+  		  	msg.append(p.msg);
+  		  	info_container.append(msg);
+  		  	info_container.append(document.createElement("br"));
+  		  	var time=document.createElement("div");
+  		  	time.setAttribute("class","time");
+  		  	var time_span=document.createElement("span");
+  		  	time_span.append(p.submission_time);
+  		  	time.append(time_span);
+  		  	info_container.append(time);
+  		  	item.append(info_container);
+  		  	$("div.news-list").append(item);
+      }
+    };
 	    $.get("http://lostfound.yiwangchunyu.wang:8000/proxy?url=https://lostandfound.yiwangchunyu.wang/index/show.php", function(p, status)
 	    {
 	      var rtn = JSON.parse(p);
-		  var data=rtn.data;
-		  for(i in data){
-		  	p=data[i];
-		  	var item=document.createElement("div");
-		  	item.setAttribute("class","news-list-item clearfix");
-		  	
-		  	if(p.image_url.length>0){
-		  		var img=document.createElement("img");
-		  		img.setAttribute("class","item-img")
-		  		var img_container=document.createElement("div");
-			  	img_container.setAttribute("class","col-xs-5");
-			  	img_container.append(img);
-			  	item.append(img_container);
-		  		img.setAttribute("src",p.image_url[0]);
-		  	}
-		  	var info_container=document.createElement("div");
-		  	if(p.image_url.length==0){
-		  		info_container.setAttribute("class","col-xs-12");
-		  	}else{
-		  		info_container.setAttribute("class","col-xs-7");
-		  	}
-		  	
-		  	var info=document.createElement("div");
-		  	info.setAttribute("class","info");
-		  	var span=document.createElement("span");
-		  	var inner_span=document.createElement("span");
-		  	inner_span.setAttribute("class","avatar");
-		  	var avatar=document.createElement("img");
-		  	avatar.setAttribute("src",p.avatarUrl);
-		  	inner_span.append(avatar);
-		  	span.append(inner_span);
-		  	span.append(p.nickName);
-		  	info.append(span);
-		  	info_container.append(info);
-		  	info_container.append(document.createElement("br"));
-		  	var msg=document.createElement("a");
-		  	msg.setAttribute("href","#");
-		  	msg.setAttribute("class","title");
-		  	msg.append(p.msg);
-		  	info_container.append(msg);
-		  	info_container.append(document.createElement("br"));
-		  	var time=document.createElement("div");
-		  	time.setAttribute("class","time");
-		  	var time_span=document.createElement("span");
-		  	time_span.append(p.submission_time);
-		  	time.append(time_span);
-		  	info_container.append(time);
-		  	item.append(info_container);
-		  	$("div.news-list").append(item);
+		    publishMsg(rtn, window.Type, window.Category);
 		  }
-	    });
+	    );
+      window.test = '全局变量';
+      // alert(test);
+      $("#lost").click(function(){
+        $(".news-list-item").remove();
+        window.Type = 'lost';
+        $.get("http://lostfound.yiwangchunyu.wang:8000/proxy?url=https://lostandfound.yiwangchunyu.wang/index/show.php", function(p, status)
+  	    {
+  	      var rtn = JSON.parse(p);
+  		    publishMsg(rtn, window.Type, window.Category);
+  		  });
+      });
+      $("#found").click(function(){
+        $(".news-list-item").remove();
+        window.Type = 'found';
+        $.get("http://lostfound.yiwangchunyu.wang:8000/proxy?url=https://lostandfound.yiwangchunyu.wang/index/show.php", function(p, status)
+        {
+          var rtn = JSON.parse(p);
+          publishMsg(rtn, window.Type, window.Category);
+        });
+      });
 	})
 
   </script>
@@ -78,8 +112,8 @@
       <input class="hidden" id="toggle-checkbox" type="checkbox">
       <div class="hidden-xs">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">FOUND</a></li>
-          <li><a href="#">LOST</a></li>
+          <li class="active"><button id="found" class="btn btn-link">FOUND</button></li>
+          <li><button id="lost" class="btn btn-link">LOST</button></li>
           <li><a href="#">个人</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -92,11 +126,11 @@
     <div class="row">
       <div class="col-sm-2">
         <div class="hidden-xs list-group side-bar">
-          <a href="#" class="list-group-item active">所有</a>
-          <a href="#" class="list-group-item">校园卡</a>
-          <a href="#" class="list-group-item">雨伞</a>
-          <a href="#" class="list-group-item">钱包</a>
-          <a href="#" class="list-group-item">其他</a>
+          <button class="list-group-item active">所有</button>
+          <button class="list-group-item">校园卡</button>
+          <button class="list-group-item">雨伞</button>
+          <button class="list-group-item">钱包</button>
+          <button class="list-group-item">其他</button>
         </div>
       </div>
       <div class="col-sm-7">
