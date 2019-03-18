@@ -30,7 +30,7 @@ img,
   line-height:20px;
 }
 .side-bar .list-group-item.active {
-    background-color: #9DBDBC;
+    background-color: #1d8868;
 }
 
 .news-list-item {
@@ -158,13 +158,13 @@ img,
 }
 
 .btn-primary {
-  background-color: #ea0c3c;
-  border-color: #db0d3a;
+  background-color: #1d8868;
+  border-color: #1d8868;
 }
 
 .btn-primary:hover {
-  background-color: #d50c37;
-  border-color: #d50c37;
+  background-color: #43ab8c;
+  border-color: #43ab8c;
 }
 
 #toggle-checkbox:checked ~ div {

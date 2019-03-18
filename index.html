@@ -19,6 +19,7 @@
       window.Category='所有'
       function publishMsg(rtn, type, category)
       {
+        $(".news-list-item").remove();
         var data=rtn.data;
   		  for(i in data){
   		  	p=data[i];
@@ -28,6 +29,8 @@
               console.log(p.type + '!' + type);
               continue;
             }
+          if(category != '所有' && p.category != category)
+          continue;
   		  	var item=document.createElement("div");
   		  	item.setAttribute("class","news-list-item clearfix");
 
@@ -154,8 +157,48 @@
 	    );
       window.test = '全局变量';
       // alert(test);
+      $("#校园卡").click(function(){
+        $("#"+window.Category).attr("class", "list-group-item");
+        window.Category = '校园卡'
+        $("#校园卡").attr("class", "list-group-item active");
+
+        $.get("http://lostfound.yiwangchunyu.wang:8000/proxy?url=https://lostandfound.yiwangchunyu.wang/index/show.php", function(p, status)
+        {
+          var rtn = JSON.parse(p);
+          publishMsg(rtn, window.Type, window.Category);
+        });
+      });
+      $("#所有").click(function(){
+        $("#"+window.Category).attr("class", "list-group-item");
+        window.Category = '所有'
+        $("#所有").attr("class", "list-group-item active");
+        $.get("http://lostfound.yiwangchunyu.wang:8000/proxy?url=https://lostandfound.yiwangchunyu.wang/index/show.php", function(p, status)
+        {
+          var rtn = JSON.parse(p);
+          publishMsg(rtn, window.Type, window.Category);
+        });
+      });
+      $("#雨伞").click(function(){
+        $("#"+window.Category).attr("class", "list-group-item");
+        window.Category = '雨伞'
+        $("#雨伞").attr("class", "list-group-item active");
+        $.get("http://lostfound.yiwangchunyu.wang:8000/proxy?url=https://lostandfound.yiwangchunyu.wang/index/show.php", function(p, status)
+        {
+          var rtn = JSON.parse(p);
+          publishMsg(rtn, window.Type, window.Category);
+        });
+      });
+      $("#钱包").click(function(){
+        $("#"+window.Category).attr("class", "list-group-item");
+        window.Category = '钱包';
+        $("#钱包").attr("class", "list-group-item active");
+        $.get("http://lostfound.yiwangchunyu.wang:8000/proxy?url=https://lostandfound.yiwangchunyu.wang/index/show.php", function(p, status)
+        {
+          var rtn = JSON.parse(p);
+          publishMsg(rtn, window.Type, window.Category);
+        });
+      });
       $("#lost").click(function(){
-        $(".news-list-item").remove();
         window.Type = 'lost';
         $.get("http://lostfound.yiwangchunyu.wang:8000/proxy?url=https://lostandfound.yiwangchunyu.wang/index/show.php", function(p, status)
   	    {
@@ -164,7 +207,6 @@
   		  });
       });
       $("#found").click(function(){
-        $(".news-list-item").remove();
         window.Type = 'found';
         $.get("http://lostfound.yiwangchunyu.wang:8000/proxy?url=https://lostandfound.yiwangchunyu.wang/index/show.php", function(p, status)
         {
@@ -186,7 +228,7 @@
       <input class="hidden" id="toggle-checkbox" type="checkbox">
       <div class="hidden-xs">
         <ul class="nav navbar-nav">
-          <li class="active"><button id="found" class="btn btn-link">FOUND</button></li>
+          <li class="active"><button id="found" class="btn btn-link active">FOUND</button></li>
           <li><button id="lost" class="btn btn-link">LOST</button></li>
           <li><a href="#">个人</a></li>
         </ul>
@@ -200,11 +242,11 @@
     <div class="row">
       <div class="col-sm-2">
         <div class="hidden-xs list-group side-bar">
-          <button class="list-group-item active">所有</button>
-          <button class="list-group-item">校园卡</button>
-          <button class="list-group-item">雨伞</button>
-          <button class="list-group-item">钱包</button>
-          <button class="list-group-item">其他</button>
+          <button id="所有"class="list-group-item active">所有</button>
+          <button id="校园卡"class="list-group-item">校园卡</button>
+          <button id="雨伞"class="list-group-item">雨伞</button>
+          <button id="钱包"class="list-group-item">钱包</button>
+          <button id="其他"class="list-group-item">其他</button>
         </div>
       </div>
       <div class="col-sm-7">
